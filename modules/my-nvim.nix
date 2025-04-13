@@ -1,4 +1,4 @@
-{config, pkgs, system, lib, my-nvim, ...}:
+{config, pkgs, lib, my-nvim, ...}:
     with lib;
     let
     cfg = config.programs.my-nvim;
