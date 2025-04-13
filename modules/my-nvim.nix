@@ -1,8 +1,5 @@
-{config, lib, pkgs, nvim_pkgs,  ...}:
-    with lib;
-    let
-    cfg = config.programs.my-nvim;
-    in 
+{lib, pkgs, nvim_pkgs,  ...}:
+    with lib; 
     {
         options.programs.my-nvim = {
             enable = mkEnableOption "My custom Neovim setup";
