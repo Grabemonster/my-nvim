@@ -36,24 +36,24 @@
 
             programs.bash.shellAliases = mkMerge [
                 {
-                    ${cfg.aliasName} = "nvim";
+                    ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
                 }
                 (mkIf cfg.viAlias {
-                    vi = "nvim";
+                    vi = "${my-nvim}/bin/my-nvim";
                 })
                 (mkIf cfg.vimAlias {
-                    vim = "nvim";
+                    vim = "${my-nvim}/bin/my-nvim";
                 })
             ];
             programs.zsh.shellAliases = mkMerge [
                 {
-                    ${cfg.aliasName} = my-nvim;
+                    ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
                 }
                 (mkIf cfg.viAlias {
-                    vi = my-nvim;
+                    vi = "${my-nvim}/bin/my-nvim";
                 })
                 (mkIf cfg.vimAlias {
-                    vim = my-nvim;
+                    vim = "${my-nvim}/bin/my-nvim";
                 })
             ];
         };
