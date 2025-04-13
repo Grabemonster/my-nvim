@@ -8,7 +8,7 @@ return{
         "Telescope",
     },
     keys = {
-        { "<S-g>", "<cmd>Telescope live_grep<cr>"},
+        { "<S-f>", "<cmd>Telescope live_grep<cr>"},
         { "<leader>ff", "<cmd>Telescope find_file<cr>", desc = "Grep project" },
         { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Git commits" }, 
     },

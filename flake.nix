@@ -18,6 +18,8 @@
         pkgs.luarocks
         pkgs.nerd-fonts.droid-sans-mono
         pkgs.fzf
+        pkgs.lua5_1
+        pkgs.gnugrep
       ];
 
       text = ''
@@ -27,32 +29,10 @@
         ln -sfn "${self}/lua" "$CONFIG_DIR/lua"
 
         echo "✅ Lua Config verlinkt nach $CONFIG_DIR"
-        echo "✅ Nerd Font (FiraCode) installiert"
         echo "✅ Luarocks ist verfügbar als: luarocks"
 
         exec nvim "$@"
       '';
     };
-
-    # DevShell: falls du Dinge entwickeln willst
-    devShells.${system}.default = pkgs.mkShell {
-      packages = [
-        pkgs.neovim
-        pkgs.luarocks
-	    pkgs.nerd-fonts.droid-sans-mono
-        pkgs.fzf
-      ];
-
-
-      shellHook = ''
-        CONFIG_DIR="$HOME/.config/nvim"
-        mkdir -p "$CONFIG_DIR"
-        ln -sf "${self}/init.lua" "$CONFIG_DIR/init.lua"
-        ln -sfn "${self}/lua" "$CONFIG_DIR/lua"
-        echo "✅ Lua Config verlinkt nach $CONFIG_DIR"
-      '';
-    };
-
-    defaultPackage.${system} = self.packages.${system}.my-nvim;
   };
 }
