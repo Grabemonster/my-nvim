@@ -30,7 +30,7 @@
         };
 
         config = mkIf cfg.enable {
-            home.programs = [ self.packages.${system}.my-nvim ] 
+            home.programs = [ self.packages.${system}.my-nvim ]; 
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 
