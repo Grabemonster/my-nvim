@@ -1,9 +1,5 @@
 {config, lib, pkgs, nvim_pkgs,  ...}:
     with lib;
-    let
-    cfg = config.programs.my-nvim;
-    allPkgs = [ cfg.package ] ++ nvim_pkgs;
-    in 
     {
         options.programs.my-nvim = {
             enable = mkEnableOption "My custom Neovim setup";
@@ -26,7 +22,7 @@
         };
 
         config = mkIf cfg.enable {
-            home.packages = allPkgs;
+            home.packages = nvim_pkgs;
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 
