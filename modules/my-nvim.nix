@@ -7,22 +7,15 @@
     {
         options.programs.my-nvim = {
             enable = mkEnableOption "My custom Neovim setup";
-
-            package = mkOption {
-                type = types.package;
-                default = pkgs.neovim;
-                description = "Which Neovim package to use";
-            };
-
             viAlias = mkOption {
                 type = types.bool;
                 default = false;
-                description = "setung an vi Allias";
+                description = "sets an vi Allias";
             };
             vimAlias = mkOption {
                 type = types.bool;
                 default = false;
-                description = "setung an vim Allias";
+                description = "sets an vim Allias";
         };
 
         aliasName = mkOption {

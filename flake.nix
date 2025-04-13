@@ -8,7 +8,8 @@
     outputs = { self, nixpkgs, home-manager, ... }: let
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
-        nvim_pkgs = with pkgs; [ 
+        nvim_pkgs = with pkgs; [
+                neovim
                 nodejs_20
                 python3
                 luarocks
