@@ -7,7 +7,7 @@
         options.programs.my-nvim = {
         enable = mkEnableOption "My custom Neovim setup";
         package = lib.mkOption {
-            type = lib.types.package;
+            type = types.package;
             default = pkgs.neovim;
             description = "Neovim package to use";
         };
