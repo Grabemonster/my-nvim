@@ -47,13 +47,13 @@
             ];
             programs.zsh.shellAliases = mkMerge [
                 {
-                    ${cfg.aliasName} = "nvim";
+                    ${cfg.aliasName} = my-nvim;
                 }
                 (mkIf cfg.viAlias {
-                    vi = "nvim";
+                    vi = my-nvim;
                 })
                 (mkIf cfg.vimAlias {
-                    vim = "nvim";
+                    vim = my-nvim;
                 })
             ];
         };
