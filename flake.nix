@@ -23,10 +23,7 @@
                 cmake
                 cargo
             ];
-    in {
-        # Paket: nvim + auto-verlinkung + luarocks + Nerd Font
-
-        packages.${system}.my-nvim = pkgs.writeShellApplication {
+        my-nvim = pkgs.writeShellApplication {
             name = "my-nvim";
 
             runtimeInputs = nvim_pkgs;
@@ -35,14 +32,16 @@
                 exec nvim "$@"
                 '';
         };
-
-        homeManagerModules.my-nvim = {config, pkgs, system, lib, ...}: 
+    in {
+        
+    
+        homeManagerModules.my-nvim = {config, pkgs, system, my-nvim, lib, ...}: 
             let
                 # Explicitly pass `self` from the flake
                 self = import ./flake.nix;
             in
                 import ./modules/my-nvim.nix {
-                    inherit pkgs nvim_pkgs config self system lib;
+                    inherit pkgs nvim_pkgs config my-nvim lib;
                 };
     };
 }
