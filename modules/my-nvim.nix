@@ -2,6 +2,7 @@
     with lib;
     let
     cfg = config.programs.my-nvim;
+    allPkgs = [ cfg.package ] ++ nvim_pkgs;
     in 
     {
         options.programs.my-nvim = {
@@ -32,11 +33,7 @@
         };
 
         config = mkIf cfg.enable {
-            home.packages = nvim_pkgs;
-            home.packages = [
-                cfg.package 
-            ];
-
+            home.packages = allPkgs;
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 
