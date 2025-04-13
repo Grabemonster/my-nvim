@@ -33,12 +33,16 @@
 
             text=''
                 exec nvim "$@"
-            '';
+                '';
         };
 
-        homeManagerModules.my-nvim = {config, pkgs, self, system, lib, ... }: 
-            import ./modules/my-nvim.nix {
-                inherit pkgs nvim_pkgs config self system lib;
-            };
+        homeManagerModules.my-nvim = {config, pkgs, system, lib, ...}: 
+            let
+                # Explicitly pass `self` from the flake
+                self = import ./flake.nix;
+            in
+                import ./modules/my-nvim.nix {
+                    inherit pkgs nvim_pkgs config self system lib;
+                };
     };
 }
