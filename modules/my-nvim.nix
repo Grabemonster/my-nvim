@@ -1,4 +1,4 @@
-{config, lib, pkgs, nvim_pkgs,  ...}:
+{config, lib, pkgs, nvim_pkgs, my-nvim, system,  ...}:
     with lib;
     let
     cfg = config.programs.my-nvim;
@@ -30,11 +30,7 @@
         };
 
         config = mkIf cfg.enable {
-            programs.neovim = {
-                enable = true;
-                package = pkgs.neovim;
-                
-            }; 
+            home.programs = [ self.packages.${system}.my-nvim ] 
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 

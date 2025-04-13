@@ -26,11 +26,19 @@
     in {
         # Paket: nvim + auto-verlinkung + luarocks + Nerd Font
 
-        homeManagerModules.my-nvim = {config, pkgs, lib, ... }: 
+        packages.${system}.my-nvim = pkgs.writeShellApplication {
+            name = "my-nvim";
+
+            runtimeInputs = nvim_pkgs;
+
+            text=''
+                exec nvim "$@"
+            '';
+        };
+
+        homeManagerModules.my-nvim = {config, pkgs, self, system, lib, ... }: 
             import ./modules/my-nvim.nix {
-                inherit pkgs nvim_pkgs config lib;
+                inherit pkgs nvim_pkgs config self system lib;
             };
-
-
     };
 }
