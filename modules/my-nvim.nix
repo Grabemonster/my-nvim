@@ -32,8 +32,7 @@
         config = mkIf cfg.enable {
             programs.neovim = {
                 enable = cfg.enable;
-                package = cfg.package;
-                extraPackages = nvim_pkgs;
+                package = cfg.package; 
             }; 
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
