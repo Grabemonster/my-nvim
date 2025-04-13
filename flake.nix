@@ -25,7 +25,12 @@
             ];
     in {
         # Paket: nvim + auto-verlinkung + luarocks + Nerd Font
-        homeManagerModules.my-nvim = import ./modules/my-nvim.nix;
+
+        homeManagerModules.my-nvim = { config, pkgs, ... }: 
+            import ./modules/my-nvim.nix {
+                inherit pkgs nvim_pkgs config;
+            };
+
 
     };
 }
