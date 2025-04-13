@@ -33,11 +33,10 @@
                 '';
         };
     in {
-        
-    
-        homeManagerModules.my-nvim = {config, pkgs, system, lib, ...}:  
-                import ./modules/my-nvim.nix {
-                    inherit pkgs nvim_pkgs config my-nvim lib;
-                };
+        # Definiere das Home-Manager Modul
+        homeManagerModules.my-nvim = {config, pkgs, system, lib, my-nvim, ...}: 
+            import ./modules/my-nvim.nix {
+                inherit pkgs nvim_pkgs config my-nvim lib;
+            };
     };
 }
