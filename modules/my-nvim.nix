@@ -5,8 +5,13 @@
     in 
     {
         options.programs.my-nvim = {
-            enable = mkEnableOption "My custom Neovim setup";
-            viAlias = mkOption {
+        enable = mkEnableOption "My custom Neovim setup";
+        package = lib.mkOption {
+            type = lib.types.package;
+            default = pkgs.neovim;
+            description = "Neovim package to use";
+        };
+        viAlias = mkOption {
                 type = types.bool;
                 default = false;
                 description = "sets an vi Allias";
@@ -25,7 +30,11 @@
         };
 
         config = mkIf cfg.enable {
-            home.packages = nvim_pkgs;
+            programs.neovim = {
+                enable = cfg.enable;
+                package = cfg.package;
+                extraPackages = nvim_pkgs;
+            } 
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 
