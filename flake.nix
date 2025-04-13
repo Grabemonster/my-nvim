@@ -35,11 +35,7 @@
     in {
         
     
-        homeManagerModules.my-nvim = {config, pkgs, system, my-nvim, lib, ...}: 
-            let
-                # Explicitly pass `self` from the flake
-                self = import ./flake.nix;
-            in
+        homeManagerModules.my-nvim = {config, pkgs, system, lib, ...}:  
                 import ./modules/my-nvim.nix {
                     inherit pkgs nvim_pkgs config my-nvim lib;
                 };
