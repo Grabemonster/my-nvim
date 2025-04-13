@@ -6,11 +6,9 @@
     };
 
     outputs = { self, nixpkgs, home-manager, ... }: let
-        cfg = config.programs.my-nvim;
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
-        nvim_pkgs = with pkgs; [
-                cfg.package
+        nvim_pkgs = with pkgs; [ 
                 nodejs_20
                 python3
                 luarocks
@@ -27,9 +25,9 @@
     in {
         # Paket: nvim + auto-verlinkung + luarocks + Nerd Font
 
-        homeManagerModules.my-nvim = { pkgs, lib, ... }: 
+        homeManagerModules.my-nvim = {config, pkgs, lib, ... }: 
             import ./modules/my-nvim.nix {
-                inherit pkgs nvim_pkgs lib;
+                inherit pkgs nvim_pkgs config lib;
             };
 
 
