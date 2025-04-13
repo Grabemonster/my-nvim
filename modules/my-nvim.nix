@@ -22,7 +22,13 @@
                 type = types.bool;
                 default = false;
                 description = "setung an vim Allias";
-            };
+        };
+
+        aliasName = mkOption {
+            type = types.str;
+            default = "my-nvim";
+            description = "Alias name to run Neovim";
+        }; 
         };
 
         config = mkIf cfg.enable {
