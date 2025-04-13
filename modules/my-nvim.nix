@@ -36,6 +36,9 @@
 
             programs.bash.shellAliases = mkMerge [
                 {
+                    nvim = "${my-nvim}/bin/my-nvim";
+                }
+                {
                     ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
                 }
                 (mkIf cfg.viAlias {
@@ -46,6 +49,9 @@
                 })
             ];
             programs.zsh.shellAliases = mkMerge [
+                {
+                    nvim = "${my-nvim}/bin/my-nvim";
+                }
                 {
                     ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
                 }
