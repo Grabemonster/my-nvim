@@ -2,11 +2,7 @@
     description = "Nvim Flake mit Lua Config, Nerd Font und Luarocks";
 
     inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        home-manger = {
-            url = "github:nix-community/home-manager";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; 
     };
 
     outputs = { self, nixpkgs, home-manager, ... }: let
