@@ -34,7 +34,7 @@
                 enable = cfg.enable;
                 package = cfg.package;
                 extraPackages = nvim_pkgs;
-            } 
+            }; 
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 
