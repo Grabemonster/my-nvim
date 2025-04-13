@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, nvim_pkgs,  ...}:
     with lib;
     let
     cfg = config.programs.my-nvim;
@@ -32,22 +32,7 @@
         };
 
         config = mkIf cfg.enable {
-            home.packages = with pkgs; [
-                cfg.package
-                nodejs_20
-                python3
-                luarocks
-                fzf
-                lua5_1
-                ripgrep
-                gcc
-                gnumake
-                binutils
-                libcxx
-                cmake
-                cargo
-            ];
-
+            home.packages = nvim_pkgs;
             home.file.".config/nvim/init.lua".source = ../init.lua;
             home.file.".config/nvim/lua".source = ../lua;
 
