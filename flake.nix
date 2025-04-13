@@ -33,8 +33,11 @@
                 '';
         };
     in {
-        # Definiere das Home-Manager Modul
-        homeManagerModules.my-nvim = {config, pkgs, system, lib, my-nvim, ...}: 
+        # Exportiere `my-nvim` unter `packages.${system}.my-nvim`
+        packages.${system}.my-nvim = my-nvim;
+
+        # Definiere das Home-Manager Modul und übergebe `my-nvim` als Argument
+        homeManagerModules.my-nvim = {config, pkgs, system, lib, ...}: 
             import ./modules/my-nvim.nix {
                 inherit pkgs nvim_pkgs config my-nvim lib;
             };
