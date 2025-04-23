@@ -47,9 +47,17 @@ return {
                     cmp.abort()
                     fallback()
                 end,
-                ["<tab>"] = function(fallback)
-                    return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
-                end,            }),
+
+                ["<Tab>"] = function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
+                end,
+            }),
             -- sources for autocompletion
             sources = cmp.config.sources({
                 { name = "nvim_lsp"},
