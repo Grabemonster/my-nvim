@@ -7,7 +7,17 @@ let
     ];
 
     lspConfigTemplate = lsp: ''
-        local ${lsp.lspconfigName}_cmp = "{ '${pkgs.${lsp.name}}/bin/'" .. get_cmd_for_lsp("${lsp.lspconfigName}")
+        local ${lsp.lspconfigName}_base_cmp = "{ '${pkgs.${lsp.name}}/bin/'"
+        local lua_ls_cmd = {}
+        -- Füge die Teile von get_cmd_for_lsp hinzu, aber überspringe den ersten Teil, der bereits im Pfad enthalten ist
+        for i, part in ipairs(get_cmd_for_lsp("lua_ls")) do
+            -- Füge alle weiteren Teile nach dem ersten hinzu
+            if i > 1 then
+                table.insert(lua_ls_cmd, part)
+            else if i=1 then
+                table.insert(lua_ls_cmd, ${lsp.lspconfigName}_base_cmp .. part)
+            end
+        end
         require("lspconfig").${lsp.lspconfigName}.setup({ 
             cmd = ${lsp.lspconfigName}_cmp,
         })
@@ -24,10 +34,13 @@ let
             local lsp_file_path = "~/.local/share/nvim/lazy/nvim-lspconfig/lsp/" .. lspconfigName .. ".lua"
 
             -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
-            local cmd_output = vim.fn.system("cat " .. lsp_file_path .. " | grep 'cmd = { ' | cut -f 6- -d ' ' | cut -c2-")
+            local cmd_output = vim.fn.system("cat " .. lsp_file_path .. " | grep 'cmd = { ' | cut -f 5- -d ' '")
 
-            -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche
-            return vim.fn.trim(cmd_output)
+            -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche und gebe den Wert als Array zurück
+            local cmd_parts = vim.split(vim.fn.trim(cmd_output), ",")
+      
+            -- Rückgabe als Array
+            return cmd_parts
       end 
 
 
