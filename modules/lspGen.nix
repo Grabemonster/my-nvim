@@ -13,8 +13,7 @@ let
   })
 '';
 
-  lspTexts = builtins.map lspConfigTemplate lspServers;
-  configBody = builtins.concatStringsSep "\n\n" lspTexts;
+  configBody = builtins.concatStringsSep "\n\n" (builtins.map lspConfigTemplate lspList);
 
   resultText = ''
     return {
