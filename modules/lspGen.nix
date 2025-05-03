@@ -18,7 +18,7 @@ let
                 table.insert(${lsp.lspconfigName}_cmd, ${lsp.lspconfigName}_base_cmp .. part)
             end
         end
-        vim.notify()
+        vim.notify(${lsp.lspconfigName}_cmp)
         require("lspconfig").${lsp.lspconfigName}.setup({ 
             cmd = ${lsp.lspconfigName}_cmp,
         })
