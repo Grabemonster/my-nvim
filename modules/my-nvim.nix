@@ -37,7 +37,7 @@ in
         home.packages = [ my-nvim ];
         home.file.".config/nvim/init.lua".source = ../init.lua;
         home.file.".config/nvim/lua".source = ../lua;
-        home.file.".config/nvim/lua/plugins/nixos/lsp_config.lua".text = import ./lspGen.nix;
+        home.file.".config/nvim/lua/plugins/nixos/lsp_config.lua".text = lspOverrides;
 
 
         programs.bash.shellAliases = mkMerge [
