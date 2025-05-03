@@ -7,18 +7,7 @@ let
     ];
 
     lspConfigTemplate = lsp: ''
-        local ${lsp.lspconfigName}_base_cmd = "${pkgs.${lsp.name}}/bin/"
-        local ${lsp.lspconfigName}_cmd = {}
-        -- Füge die Teile von get_cmd_for_lsp hinzu, aber überspringe den ersten Teil, der bereits im Pfad enthalten ist
-        for i, part in ipairs(get_cmd_for_lsp("${lsp.lspconfigName}")) do
-            -- Füge alle weiteren Teile nach dem ersten hinzu
-            if i > 1 then
-                table.insert(${lsp.lspconfigName}_cmd, part)
-            elseif i==1 then
-                table.insert(${lsp.lspconfigName}_cmd, ${lsp.lspconfigName}_base_cmd .. part)
-            end
-        end
-        vim.notify(vim.inspect(${lsp.lspconfigName}_cmd))
+        local ${lsp.lspconfigName}_cmd = create_cmd("${pkgs.${lsp.name}}/bin", "${lsp.lspconfigName}"})
         require("lspconfig").${lsp.lspconfigName}.setup({ 
             cmd = ${lsp.lspconfigName}_cmd,
         })
@@ -37,21 +26,40 @@ let
             -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
             local cmd_output = vim.fn.system(
                 "cat " .. lsp_file_path ..
-  " | grep 'cmd = { '" ..
-  " | cut -f 5- -d ' '" ..
-  " | sed -E 's/.*cmd = (.*)/\\1/'" ..
-  " | perl -pe 's/^\\{\\s*(.*?)\\s*\\},?$/\\1/' " ..
-  " | sed -E \"s/'/ /g\""
-            )
-
-            vim.notify(cmd_output)
+                " | grep 'cmd = { '" ..
+                " | cut -f 5- -d ' '" ..
+                " | sed -E 's/.*cmd = (.*)/\\1/'" ..
+                " | perl -pe 's/^\\{\\s*(.*?)\\s*\\},?$/\\1/' " ..
+                " | sed -E \"s/'/ /g\""
+            ) 
 
             -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche und gebe den Wert als Array zurück
             local cmd_parts = vim.split(vim.fn.trim(cmd_output), ",")
       
             -- Rückgabe als Array
             return cmd_parts
-      end 
+      end
+      
+      -- Funktion zum Erstellen des vollständigen cmd-Arrays
+      local function create_cmd(base_cmd, lspconfig_name)
+        local cmd_parts = {}
+    
+        -- Holen des Array aus get_cmd_for_lsp
+        local lsp_cmd_parts = get_cmd_for_lsp(lspconfig_name)
+    
+        -- Füge den Basisbefehl zum ersten Element hinzu
+        for i, part in ipairs(lsp_cmd_parts) do
+            if i == 1 then
+                table.insert(cmd_parts, base_cmd .. part)
+            else
+                table.insert(cmd_parts, part)
+            end
+        end
+    
+        return cmd_parts
+      end
+      
+                
 
 
     ${configBody}
