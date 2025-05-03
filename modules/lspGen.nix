@@ -2,10 +2,9 @@
 
 let
     lspList = [
-        { name = "lua-language-server"; lspconfigName = "lua_ls"; }
-        { name = "rust-analyzer";       lspconfigName = "rust_analyzer"; }
-        { name = "pyright";             lspconfigName = "pyright"; }
-        { name = "nixd";                lspconfigName = "nixd";}
+        { name = "lua-language-server"; lspconfigName = "lua_ls";           lspFileName="lua-language-server";}
+        { name = "pyright";             lspconfigName = "pyright";          lspFileName="pyright-langserver";}
+        { name = "nixd";                lspconfigName = "nixd";             lspFileName="nixd";}
     ];
 
     lspConfigTemplate = lsp: ''
