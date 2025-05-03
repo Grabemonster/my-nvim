@@ -6,10 +6,10 @@ return {
             settings = {
                 python = {
                     analysis = {
-                        autoSearchPath = true,
-                        useLibaryCodeForTypes = true,
+                        autoSearchPaths = true,
+                        useLibraryCodeForTypes = true,
                         diagnosticMode = "workspace",
-                        extraPath = { vim.fn.getenv("PYTHONPATH")}
+                        extraPaths = { vim.fn.getenv("PYTHONPATH") }
                     }
                 }
             }
