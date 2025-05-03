@@ -39,10 +39,11 @@ in
     };
 
     config = mkIf cfg.enable {
-        home.packages = [ my-nvim ]; 
+        home.packages = [ my-nvim ];
+        home.file = lspOverrides;
         home.file.".config/nvim/init.lua".source = ../init.lua;
         home.file.".config/nvim/lua".source = ../lua;
-        home.file = lspOverrides;
+        
 
 
         programs.bash.shellAliases = mkMerge [
