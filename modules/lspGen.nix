@@ -15,7 +15,7 @@ let
 
   lspConfigs = pkgs.lib.mapAttrs' (nixName: luaName:
     pkgs.lib.nameValuePair
-      (".config/nvim/lua/lsp/overrides/${luaName}.lua")
+      (".config/nvim/lua/plugins/nixos/${luaName}.lua")
       {
         text = lspConfigTemplate nixName;
       }
