@@ -12,7 +12,7 @@ let
   mkdir -p $out/plugins/nixos
   cp -r ${../lua}/* $out/
   cp $lspConfig $out/plugins/nixos/lsp_config.lua
-    '' 
+    ''; 
     in 
     { 
     options.programs.my-nvim = {
