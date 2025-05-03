@@ -7,9 +7,8 @@ let
     ];
 
     lspConfigTemplate = lsp: ''
-        local ${lsp.lspconfigName}_cmd = create_cmd("${pkgs.${lsp.name}}/bin", "${lsp.lspconfigName}"})
         require("lspconfig").${lsp.lspconfigName}.setup({ 
-            cmd = ${lsp.lspconfigName}_cmd,
+            cmd = create_cmd("${pkgs.${lsp.name}}/bin", "${lsp.lspconfigName}"),
         })
     '';
 
