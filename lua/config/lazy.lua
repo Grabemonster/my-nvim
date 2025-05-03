@@ -17,11 +17,19 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 -- Setup lazy.nvim
+local is_nixos = vim.fn.filereadable("/etc/NIXOS") == 1
+
+local plugin_specs = {
+  { import = "plugins" },
+}
+
+if is_nixos then
+  table.insert(plugin_specs, { import = "plugins.nixos" })
+else
+  table.insert(plugin_specs, {import = "plugins.standart" })
+end
+
 require("lazy").setup({
-  spec = {
-    -- import your plugins
-    { import = "plugins" },
-  }, 
-  -- automatically check for plugin updates
+  spec = plugin_specs,
   checker = { enabled = true },
 })

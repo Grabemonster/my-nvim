@@ -22,6 +22,7 @@
                 libcxx
                 cmake
                 cargo
+                lua-language-server
             ];
         my-nvim = pkgs.writeShellApplication {
             name = "my-nvim";
