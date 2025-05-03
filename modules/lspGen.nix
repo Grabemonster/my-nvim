@@ -1,10 +1,11 @@
 { pkgs, ... }:
+
 let
   lspServers = [
     "lua-language-server"
     "rust-analyzer"
     "pyright"
-  ]; 
+  ];
 
   lspNameMap = {
     "lua-language-server" = "lua_ls";
@@ -18,9 +19,14 @@ let
     }
   '';
 
-  lspConfigs = pkgs.lib.mapAttrs' (nixName: luaName: 
+  # Alle LSPs in einer einzigen Konfigurationsdatei
+  lspConfig = pkgs.lib.concatMapAttrs' (nixName: luaName: 
     lspConfigTemplate nixName
   ) (pkgs.lib.filterAttrs (k: _: builtins.elem k lspServers) lspNameMap);
 
 in
-  lspConfigs
+  # Hier wird die gesamte LSP-Konfiguration als Text in eine einzige Datei geschrieben
+  home.file = {
+    ".config/nvim/lua/plugins/nixos/lsp_config.lua".text = lspConfig;
+  };
+
