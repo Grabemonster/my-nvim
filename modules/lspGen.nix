@@ -8,6 +8,7 @@ let
 
     lspConfigTemplate = lsp: ''
         local ${lsp.lspconfigName}_cmp = "{ "${pkgs.${lsp.name}}/bin/" .. get_cmd_for_lsp("${lsp.lspconfigName}")
+
         require("lspconfig").${lsp.lspconfigName}.setup({ 
             cmd = ${lsp.lspconfigName}_cmp,
         })
@@ -28,9 +29,11 @@ let
 
             -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche
             return vim.fn.trim(cmd_output)
-        end 
-        ${configBody}
-      end
+      end 
+
+
+    ${configBody}
+      end,
     }
     '';
 
