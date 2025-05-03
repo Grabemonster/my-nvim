@@ -13,15 +13,13 @@ let
     "pyright" = "pyright";
   };
 
-  lspConfigTemplate = lspName: ''
-    require("lspconfig").${lspName}.setup({
-      cmd = { "${pkgs.${lspName}}/bin/${lspName}" },
-    })  '';
+  lspConfigTemplate = lsp: ''
+    require("lspconfig").${lspNameMap.${lsp}}.setup({
+      cmd = { "${pkgs.${lsp}}/bin/${lsp}" },
+    })
+  '';
 
-  # Liste der aktiven LSPs mit Texten
-lspTexts = builtins.map (lsp: lspConfigTemplate lsp)
-    (builtins.filter (lsp: builtins.hasAttr lsp lspNameMap) lspServers);
-
+  lspTexts = builtins.map lspConfigTemplate lspServers;
   configBody = builtins.concatStringsSep "\n\n" lspTexts;
 
   resultText = ''
