@@ -9,7 +9,7 @@ let
 
     lspConfigTemplate = lsp: ''
   require("lspconfig").${lsp.lspconfigName}.setup({
-    cmd = { "${pkgs.${lsp.name}}/bin/${lsp.lspFileName}" },
+    cmd = { "${pkgs.${lsp.name}}/bin/${lsp.lspFileName}" , "--stdio"},
   })
     '';
 
