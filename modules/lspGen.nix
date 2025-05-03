@@ -7,10 +7,10 @@ let
     ];
 
     lspConfigTemplate = lsp: ''
-  require("lspconfig").${lsp.lspconfigName}.setup({
-  local ${lsp.lspconfigName}_cmp = get_cmd_for_lsp("${lsp.lspconfigName}")
-    cmd = { "${pkgs.${lsp.name}}/bin/${lsp.lspFileName}" , "--stdio"},
-  })
+        local ${lsp.lspconfigName}_cmp = "{ "${pkgs.${lsp.name}}/bin/"get_cmd_for_lsp("${lsp.lspconfigName}")
+        require("lspconfig").${lsp.lspconfigName}.setup({ 
+            cmd = ${lsp.lspconfigName}_cmp,
+        })
     '';
 
     configBody = builtins.concatStringsSep "\n\n" (builtins.map lspConfigTemplate lspList);
