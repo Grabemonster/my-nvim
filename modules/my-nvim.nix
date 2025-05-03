@@ -4,12 +4,7 @@ let
     cfg = config.programs.my-nvim;
     # LSP-Dateien einbinden
     lspOverrides = import ./lspGen.nix {
-        inherit pkgs;
-        lspServers = [
-            "lua-language-server"
-            "rust-analyzer"
-            "pyright"
-        ];
+        inherit pkgs; 
     };
 in 
     { 
