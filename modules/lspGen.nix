@@ -18,7 +18,7 @@ let
 
     resultText = ''
     return {
-      "neovim/lspconfig",
+      "neovim/nvim-lspconfig",
       config = function()
         ${configBody}
       end
