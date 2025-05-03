@@ -19,12 +19,14 @@ let
     }
   '';
 
-  # Alle LSPs in einer einzigen Konfigurationsdatei
-  lspConfig = pkgs.lib.concatMapAttrs' (nixName: luaName: 
-    lspConfigTemplate nixName
-  ) (pkgs.lib.filterAttrs (k: _: builtins.elem k lspServers) lspNameMap);
+  # Liste der aktiven LSPs mit Texten
+  activeLspTexts = builtins.map (lsp:
+    lspConfigTemplate lsp
+  ) (builtins.filter (lsp: builtins.hasAttr lsp lspNameMap) lspServers);
+
+  # Verbinde alle zu einer einzigen Datei
+  lspConfig = builtins.concatStringsSep "\n\n" activeLspTexts;
 
 in
-  # Hier wird die gesamte LSP-Konfiguration als Text in eine einzige Datei geschrieben
   lspConfig
 
