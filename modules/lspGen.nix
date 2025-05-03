@@ -29,7 +29,7 @@ let
     resultText = ''
     return {
       "neovim/nvim-lspconfig",
-      config = function()
+       config = function()
             local function get_cmd_for_lsp(lspconfigName)
             -- Erstelle den Pfad zur lsp-Konfigurationsdatei für das angegebene lspconfigName
             local lsp_file_path = "~/.local/share/nvim/lazy/nvim-lspconfig/lsp/" .. lspconfigName .. ".lua"
@@ -41,7 +41,7 @@ let
                 " | cut -f 5- -d ' '" ..
                 " | sed -E 's/.*cmd = (.*)/\1/'" ..
                 " | perl -pe 's/^\{\s*(.*?)\s*\},?$/\1/' " ..
-                " | sed -E \"s/\'/ /g\""
+                " | sed -E \"s/'/ /g\""
             )
 
             vim.notify(cmd_output)
@@ -55,6 +55,7 @@ let
 
 
     ${configBody}
+
       end,
     }
     '';
