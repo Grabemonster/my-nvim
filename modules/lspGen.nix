@@ -35,7 +35,14 @@ let
             local lsp_file_path = "~/.local/share/nvim/lazy/nvim-lspconfig/lsp/" .. lspconfigName .. ".lua"
 
             -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
-            local cmd_output = vim.fn.system("cat " .. lsp_file_path .. " | grep 'cmd = { ' | cut -f 5- -d ' '" | sed -E 's/.*cmd = (.*)/\1/' | perl -pe 's/^\{\s*(.*?)\s*\},?$/\1/' | sed -E "s/'/ /g")
+            local cmd_output = vim.fn.system(
+                "cat " .. lsp_file_path .. 
+                " | grep 'cmd = { '" .. 
+                " | cut -f 5- -d ' '" ..
+                " | sed -E 's/.*cmd = (.*)/\1/'" ..
+                " | perl -pe 's/^\{\s*(.*?)\s*\},?$/\1/' " ..
+                " | sed -E \"s/\'/ /g\""
+            )
 
             vim.notify(cmd_output)
 
