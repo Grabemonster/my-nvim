@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 let
     lspList = [
         { name = "lua-language-server"; lspconfigName = "lua_ls";           lspFileName="lua-language-server";}
@@ -9,7 +8,7 @@ let
 
     lspConfigTemplate = lsp: ''
   require("lspconfig").${lsp.lspconfigName}.setup({
-    cmd = { "${pkgs.${lsp.name}}/bin/${lsp.lspFileName}" , "--stdio"},
+    cmd = { "${pkgs.${lsp.name}}/bin/" , "--stdio"},
   })
     '';
 
