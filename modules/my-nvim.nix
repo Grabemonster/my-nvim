@@ -3,7 +3,7 @@ with lib;
 let
     cfg = config.programs.my-nvim;
     # LSP-Dateien einbinden
-    lspOverrides = import ./generate-lsp-files.nix {
+    lspOverrides = import ./lspGen.nix {
         inherit pkgs;
         lspServers = [
             "lua-language-server"
