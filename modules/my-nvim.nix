@@ -38,7 +38,7 @@ in
         home.file.".config/nvim/init.lua".source = ../init.lua;
         home.file.".config/nvim/lua".source = ../lua;
         home.file = {
-            ".config/nvim/lua/plugins/nixos/lsp_config.lua".text = import ./modules/lspConfig.nix;
+            ".config/nvim/lua/plugins/nixos/lsp_config.lua".text = import ./modules/lspGen.nix;
         }; 
 
 
