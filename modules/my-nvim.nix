@@ -1,11 +1,10 @@
 {config, pkgs, lib, my-nvim, ...}:
-    with lib;
-    let
+with lib;
+let
     cfg = config.programs.my-nvim;
-    in 
-    {
-        import = [../lua/plugins/nixos/lspGen.nix];
-        options.programs.my-nvim = {
+in 
+    { 
+    options.programs.my-nvim = {
         enable = mkEnableOption "My custom Neovim setup";
         package = lib.mkOption {
             type = types.package;
@@ -13,14 +12,14 @@
             description = "Neovim package to use";
         };
         viAlias = mkOption {
-                type = types.bool;
-                default = false;
-                description = "sets an vi Allias";
-            };
-            vimAlias = mkOption {
-                type = types.bool;
-                default = false;
-                description = "sets an vim Allias";
+            type = types.bool;
+            default = false;
+            description = "sets an vi Allias";
+        };
+        vimAlias = mkOption {
+            type = types.bool;
+            default = false;
+            description = "sets an vim Allias";
         };
 
         aliasName = mkOption {
@@ -28,43 +27,43 @@
             default = "my-nvim";
             description = "Alias name to run Neovim";
         }; 
-        };
+    };
 
-        config = mkIf cfg.enable {
-            home.packages = [ my-nvim ]; 
-            home.file.".config/nvim/init.lua".source = ../init.lua;
-            home.file.".config/nvim/lua".source = ../lua; 
-            
+    config = mkIf cfg.enable {
+        home.packages = [ my-nvim ]; 
+        home.file.".config/nvim/init.lua".source = ../init.lua;
+        home.file.".config/nvim/lua".source = ../lua; 
 
-            programs.bash.shellAliases = mkMerge [
-                {
-                    nvim = "${my-nvim}/bin/my-nvim";
-                }
-                {
-                    ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
-                }
-                (mkIf cfg.viAlias {
-                    vi = "${my-nvim}/bin/my-nvim";
-                })
-                (mkIf cfg.vimAlias {
-                    vim = "${my-nvim}/bin/my-nvim";
-                })
-            ];
-            programs.zsh.shellAliases = mkMerge [
-                {
-                    nvim = "${my-nvim}/bin/my-nvim";
-                }
-                {
-                    ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
-                }
-                (mkIf cfg.viAlias {
-                    vi = "${my-nvim}/bin/my-nvim";
-                })
-                (mkIf cfg.vimAlias {
-                    vim = "${my-nvim}/bin/my-nvim";
-                })
-            ];
-        };
-    }
+
+        programs.bash.shellAliases = mkMerge [
+            {
+                nvim = "${my-nvim}/bin/my-nvim";
+            }
+            {
+                ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
+            }
+            (mkIf cfg.viAlias {
+                vi = "${my-nvim}/bin/my-nvim";
+            })
+            (mkIf cfg.vimAlias {
+                vim = "${my-nvim}/bin/my-nvim";
+            })
+        ];
+        programs.zsh.shellAliases = mkMerge [
+            {
+                nvim = "${my-nvim}/bin/my-nvim";
+            }
+            {
+                ${cfg.aliasName} = "${my-nvim}/bin/my-nvim";
+            }
+            (mkIf cfg.viAlias {
+                vi = "${my-nvim}/bin/my-nvim";
+            })
+            (mkIf cfg.vimAlias {
+                vim = "${my-nvim}/bin/my-nvim";
+            })
+        ];
+    };
+}
 
 
