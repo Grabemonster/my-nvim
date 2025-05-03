@@ -29,7 +29,8 @@ let
                 " | cut -f 5- -d ' '" ..
                 " | sed -E 's/.*cmd = (.*)/\\1/'" ..
                 " | perl -pe 's/^\\{\\s*(.*?)\\s*\\},?$/\\1/' " ..
-                " | sed -E \"s/'/ /g\""
+                " | sed -E \"s/'/ /g\"" ..
+                " | tr -d '[:space:]'"
             ) 
 
             -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche und gebe den Wert als Array zurück
