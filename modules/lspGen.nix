@@ -10,7 +10,7 @@ let
         local ${lsp.lspconfigName}_base_cmd = "${pkgs.${lsp.name}}/bin/"
         local ${lsp.lspconfigName}_cmd = {}
         -- Füge die Teile von get_cmd_for_lsp hinzu, aber überspringe den ersten Teil, der bereits im Pfad enthalten ist
-        for i, part in ipairs(get_cmd_for_lsp("lua_ls")) do
+        for i, part in ipairs(get_cmd_for_lsp("${lsp.lspconfigName}")) do
             -- Füge alle weiteren Teile nach dem ersten hinzu
             if i > 1 then
                 table.insert(${lsp.lspconfigName}_cmd, part)
