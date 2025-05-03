@@ -40,13 +40,9 @@ in
 
     config = mkIf cfg.enable {
         home.packages = [ my-nvim ];
-        home.file = lib.mkMerge [
-            {
-                ".config/nvim/init.lua".source = ../init.lua;
-                ".config/nvim/lua".source = ../lua;
-            }
-            lspOverrides
-        ]; 
+        lspOverrides;
+        home.file.".config/nvim/init.lua".source = ../init.lua;
+        home.file.".config/nvim/lua".source = ../lua;
         
 
 
