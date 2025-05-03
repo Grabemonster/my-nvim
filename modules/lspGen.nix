@@ -14,7 +14,7 @@ let
             -- Füge alle weiteren Teile nach dem ersten hinzu
             if i > 1 then
                 table.insert(lua_ls_cmd, part)
-            else if i=1 then
+            elseif i==1 then
                 table.insert(lua_ls_cmd, ${lsp.lspconfigName}_base_cmp .. part)
             end
         end
