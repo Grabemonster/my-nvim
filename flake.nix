@@ -53,10 +53,7 @@
             import ./modules/my-nvim.nix {
                 inherit pkgs nvim_pkgs config my-nvim lib;
             };
-            import ./lua/plugins/nixos/lspGen.nix {
-                inherit pkgs config
-            }
-        # Definiere die devShell als Teil der Ausgaben
+            # Definiere die devShell als Teil der Ausgaben
         devShells.${system}.my-nvim = devShell;
     };
 }

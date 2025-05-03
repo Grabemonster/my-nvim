@@ -1,33 +1,24 @@
-{ config, pkgs, ... }:
+{ pkgs, lspServers ? [] }:
 
 let
-  # Liste der LSPs, die du verwenden möchtest
-  lspServers = [
-    "lua-language-server"
-    "rust-analyzer"
-    "pyright"
-  ];
+  lspNameMap = {
+    "lua-language-server" = "lua_ls";
+    "rust-analyzer" = "rust_analyzer";
+    "pyright" = "pyright";
+  };
 
-  # Allgemeine LSP-Konfiguration
-  lspConfigTemplate = ''
+  lspConfigTemplate = lspName: ''
     return {
-      cmd = { "${pkgs.${lspName}}/bin/${lspName}" }; 
+      cmd = { "${pkgs.${lspName}}/bin/${lspName}" },
     }
   '';
 
-  # Dynamisch LSP-Konfig-Dateien erstellen
   lspConfigs = pkgs.lib.mapAttrs' (nixName: luaName:
     pkgs.lib.nameValuePair
-      (".config/nvim/lua/plugins/nixos/${luaName}.lua")
+      (".config/nvim/lua/lsp/overrides/${luaName}.lua")
       {
-        text = builtins.replaceStrings
-          ["${lspName}"]
-          [lspName]
-          lspConfigTemplate;
+        text = lspConfigTemplate nixName;
       }
   ) (pkgs.lib.filterAttrs (k: _: builtins.elem k lspServers) lspNameMap);
-
-in {
-  home.file = lspConfigs;
-}
-
+in
+  lspConfigs
