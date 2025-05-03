@@ -26,5 +26,5 @@ let
 
 in
   # Hier wird die gesamte LSP-Konfiguration als Text in eine einzige Datei geschrieben
-  lspConfig;
+  lspConfig
 
