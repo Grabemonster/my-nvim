@@ -14,16 +14,24 @@ let
   };
 
   lspConfigTemplate = lspName: ''
-    return {
-      cmd = { "${pkgs.${lspName}}/bin/${lspName}" },
-    }
-  '';
+    require("lspconfig").${lspNameMap.${lsp}}.setup({
+      cmd = { "${pkgs.${lsp}}/bin/${lsp}" },
+    })  '';
 
   # Liste der aktiven LSPs mit Texten
 lspTexts = builtins.map (lsp: lspConfigTemplate lsp)
     (builtins.filter (lsp: builtins.hasAttr lsp lspNameMap) lspServers);
 
-  resultText = builtins.concatStringsSep "\n\n" lspTexts;
+  configBody = builtins.concatStringsSep "\n\n" lspTexts;
+
+  resultText = ''
+    return {
+      "neovim/lspconfig",
+      config = function()
+    ${configBody}
+      end
+    }
+  '';
 
 in
 
