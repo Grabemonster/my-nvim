@@ -35,7 +35,7 @@ let
             local lsp_file_path = "~/.local/share/nvim/lazy/nvim-lspconfig/lsp/" .. lspconfigName .. ".lua"
 
             -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
-            local cmd_output = vim.fn.system("cat " .. lsp_file_path .. " | grep 'cmd = { ' | cut -f 5- -d ' '")
+            local cmd_output = vim.fn.system("cat " .. lsp_file_path .. " | grep 'cmd = { ' | cut -f 5- -d ' '" | sed -E 's/.*cmd = (.*)/\1/' | perl -pe 's/^\{\s*(.*?)\s*\},?$/\1/' | sed -E "s/'/ /g")
 
             -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche und gebe den Wert als Array zurück
             local cmd_parts = vim.split(vim.fn.trim(cmd_output), ",")
