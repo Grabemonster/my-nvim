@@ -6,7 +6,14 @@ let
     lspOverrides = import ./lspGen.nix {
         inherit pkgs; 
     };
-in 
+    myBuiltinLua =pkgs.runCommand "nvim-lua-dir" {
+        lspConfig = lspOverrides;
+    } ''
+  mkdir -p $out/plugins/nixos
+  cp -r ${../lua}/* $out/
+  cp $lspConfig $out/plugins/nixos/lsp_config.lua
+    '' 
+    in 
     { 
     options.programs.my-nvim = {
         enable = mkEnableOption "My custom Neovim setup";
@@ -36,8 +43,7 @@ in
     config = mkIf cfg.enable {
         home.packages = [ my-nvim ];
         home.file.".config/nvim/init.lua".source = ../init.lua;
-        home.file.".config/nvim/lua".source = ../lua;
-        home.file.".config/nvim/lua/plugins/nixos/lsp_config.lua".text = lspOverrides;
+        home.file.".config/nvim/lua".source = myBuiltinLua; 
 
 
         programs.bash.shellAliases = mkMerge [

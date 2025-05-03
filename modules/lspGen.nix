@@ -20,13 +20,14 @@ let
   '';
 
   # Liste der aktiven LSPs mit Texten
-  activeLspTexts = builtins.map (lsp:
-    lspConfigTemplate lsp
-  ) (builtins.filter (lsp: builtins.hasAttr lsp lspNameMap) lspServers);
+lspTexts = builtins.map (lsp: lspConfigTemplate lsp)
+    (builtins.filter (lsp: builtins.hasAttr lsp lspNameMap) lspServers);
 
-  # Verbinde alle zu einer einzigen Datei
-  lspConfig = builtins.concatStringsSep "\n\n" activeLspTexts;
+  resultText = builtins.concatStringsSep "\n\n" lspTexts;
 
 in
-  lspConfig
 
+pkgs.writeTextFile {
+  name = "lsp_config.lua";
+  text = resultText;
+}
