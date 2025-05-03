@@ -1,9 +1,9 @@
 { pkgs, ... }:
 let
     lspList = [
-        { name = "lua-language-server"; lspconfigName = "lua_ls";           lspFileName="lua-language-server";}
-        { name = "pyright";             lspconfigName = "pyright";          lspFileName="pyright-langserver";}
-        { name = "nixd";                lspconfigName = "nixd";             lspFileName="nixd";}
+        { name = "lua-language-server"; lspconfigName = "lua_ls";}
+        { name = "pyright";             lspconfigName = "pyright";}
+        { name = "nixd";                lspconfigName = "nixd";}
     ];
 
     lspConfigTemplate = lsp: ''
@@ -25,12 +25,12 @@ let
             -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
             local cmd_output = vim.fn.system(
                 "cat " .. lsp_file_path ..
-                " | grep 'cmd = { '" ..
-                " | cut -f 5- -d ' '" ..
-                " | sed -E 's/.*cmd = (.*)/\\1/'" ..
-                " | perl -pe 's/^\\{\\s*(.*?)\\s*\\},?$/\\1/' " ..
-                " | sed -E \"s/'/ /g\"" ..
-                " | tr -d '[:space:]'"
+                " | ${pkgs.gnugrep}/bin/grep 'cmd = { '" ..
+                " | ${pkgs.coreutils}/bin/cut -f 5- -d ' '" ..
+                " | ${pkgs.gnused}/bin/sed -E 's/.*cmd = (.*)/\\1/'" ..
+                " | ${pkgs.perl}/bin/perl -pe 's/^\\{\\s*(.*?)\\s*\\},?$/\\1/' " ..
+                " | ${pkgs.gnused}/bin/sed -E \"s/'/ /g\"" ..
+                " | ${pkgs.coreutils}/bin/tr -d '[:space:]'"
             ) 
 
             -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche und gebe den Wert als Array zurück
