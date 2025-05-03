@@ -4,6 +4,7 @@
     cfg = config.programs.my-nvim;
     in 
     {
+        import = [../lua/plugins/nixos/lspGen.nix];
         options.programs.my-nvim = {
         enable = mkEnableOption "My custom Neovim setup";
         package = lib.mkOption {
@@ -32,8 +33,7 @@
         config = mkIf cfg.enable {
             home.packages = [ my-nvim ]; 
             home.file.".config/nvim/init.lua".source = ../init.lua;
-            home.file.".config/nvim/lua".source = ../lua;
-            import = [../lua/plugins/nixos/lspGen.nix];
+            home.file.".config/nvim/lua".source = ../lua; 
             
 
             programs.bash.shellAliases = mkMerge [
