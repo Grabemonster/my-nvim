@@ -14,11 +14,10 @@ let
   '';
 
   lspConfigs = pkgs.lib.mapAttrs' (nixName: luaName:
-    pkgs.lib.nameValuePair
-      (".config/nvim/lua/plugins/nixos/${luaName}.lua")
-      {
-        text = lspConfigTemplate nixName;
-      }
+    {
+       lspConfigTemplate nixName;
+    }
   ) (pkgs.lib.filterAttrs (k: _: builtins.elem k lspServers) lspNameMap);
 in
   lspConfigs
+
