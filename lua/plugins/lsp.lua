@@ -36,6 +36,9 @@ return {
       lspconfig.ts_ls.setup({})
       lspconfig.bashls.setup({})
       lspconfig.nil_ls.setup({})
+      lspconfig.lua_ls.setup({})
+        
+      end
     end,
   }
 }
