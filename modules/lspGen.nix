@@ -14,8 +14,8 @@ let
   };
 
   lspConfigTemplate = lspName: ''
-    require("lspconfig").${lspNameMap.${lsp}}.setup({
-      cmd = { "${pkgs.${lsp}}/bin/${lsp}" },
+    require("lspconfig").${lspName}.setup({
+      cmd = { "${pkgs.${lspName}}/bin/${lspName}" },
     })  '';
 
   # Liste der aktiven LSPs mit Texten
