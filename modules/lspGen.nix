@@ -8,6 +8,7 @@ let
 
     lspConfigTemplate = lsp: ''
   require("lspconfig").${lsp.lspconfigName}.setup({
+  local ${lsp.lspconfigName}_cmp = get_cmd_for_lsp("${lsp.lspconfigName}")
     cmd = { "${pkgs.${lsp.name}}/bin/${lsp.lspFileName}" , "--stdio"},
   })
     '';
@@ -18,6 +19,16 @@ let
     return {
       "neovim/nvim-lspconfig",
       config = function()
+            local function get_cmd_for_lsp(lspconfigName)
+            -- Erstelle den Pfad zur lsp-Konfigurationsdatei für das angegebene lspconfigName
+            local lsp_file_path = "~/.local/share/nvim/lazy/nvim-lspconfig/lsp/" .. lspconfigName .. ".lua"
+
+            -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
+            local cmd_output = vim.fn.system("cat " .. lsp_file_path .. " | grep 'cmd = { ' | cut -f 6- -d ' ' | cut -c2-")
+
+            -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche
+            return vim.fn.trim(cmd_output)
+        end 
         ${configBody}
       end
     }
