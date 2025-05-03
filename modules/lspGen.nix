@@ -26,7 +26,5 @@ let
 
 in
   # Hier wird die gesamte LSP-Konfiguration als Text in eine einzige Datei geschrieben
-  home.file = {
-    ".config/nvim/lua/plugins/nixos/lsp_config.lua".text = lspConfig;
-  };
+  lspConfig;
 
