@@ -15,7 +15,7 @@ let
             if i > 1 then
                 table.insert(${lsp.lspconfigName}_cmd, part)
             elseif i==1 then
-                table.insert(${lsp.lspconfigName}_cmd, ${lsp.lspconfigName}_base_cmb .. part)
+                table.insert(${lsp.lspconfigName}_cmd, ${lsp.lspconfigName}_base_cmd .. part)
             end
         end
         vim.notify(vim.inspect(${lsp.lspconfigName}_cmd))
