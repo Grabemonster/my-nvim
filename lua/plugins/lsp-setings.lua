@@ -18,9 +18,9 @@ return {
                         diagnosticMode = "workspace",
                         extraPaths = { vim.fn.getenv("PYTHONPATH") }
                     }
-                },
-                on_attach = on_attach
-            }
+                }, 
+            },
+            on_attach = on_attach
         })
     end,
 }
