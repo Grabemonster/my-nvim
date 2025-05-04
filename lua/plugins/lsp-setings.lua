@@ -13,6 +13,7 @@ return {
             print("LSP attact")
         end
         lspconf.pyright.setup({
+            on_attach = on_attach,
             settings = {
                 python = {
                     analysis = {
@@ -22,8 +23,7 @@ return {
                         extraPaths = { vim.fn.getenv("PYTHONPATH") }
                     }
                 }, 
-            },
-            on_attach = on_attach
+            }
         })
     end,
 }
