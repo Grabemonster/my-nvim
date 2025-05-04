@@ -40,7 +40,7 @@ let
         }; 
         
         setEditor = mkOption {
-            type = type.bool;
+            type = types.bool;
             default = false;
             description = "Set Nvim as default Editor";
         };
