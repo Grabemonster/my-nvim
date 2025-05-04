@@ -38,12 +38,23 @@ let
             default = "my-nvim";
             description = "Alias name to run Neovim";
         }; 
+        
+        setEditor = mkOption {
+            type = type.bool;
+            default = false;
+            description = "Set Nvim as default Editor";
+        };
     };
 
     config = mkIf cfg.enable {
         home.packages = [ my-nvim ];
         home.file.".config/nvim/init.lua".source = ../init.lua;
         home.file.".config/nvim/lua".source = myBuiltinLua; 
+
+        home.sessionVariables = mkIf cfg.setEditor {
+            EDITOR = "${my-nvim}/bin/my-nvim";
+            VISUAL = "${my-nvim}/bin/my-nvim";
+        };
 
 
         programs.bash.shellAliases = mkMerge [
