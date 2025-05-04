@@ -1,9 +1,9 @@
 return {
     "neovim/nvim-lspconfig",
     keys = {
-        {"<leader>gd", vim.lsp.buf.definition()},
-        {"<leader>of", vim.diagnostic.open_float()},
-        {"<leader>df", vim.lsp.buf.hover()},
+        {"<leader>gd", vim.lsp.buf.deinition},
+        {"<leader>of", vim.diagnostic.open_float},
+        {"<leader>df", vim.lsp.buf.hover},
         {"<leader>b", "<C-o>"},
         {"<leader>f", "<C-i>"}
     },
