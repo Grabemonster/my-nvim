@@ -10,6 +10,7 @@ return {
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
             vim.keymap.set("n", "<leader>df", vim.lsp.buf.hover, opts)
             vim.keymap.set("n", "<leader>of", vim.diagnostic.open_float, opts)
+            print("LSP attact")
         end
         lspconf.pyright.setup({
             settings = {
