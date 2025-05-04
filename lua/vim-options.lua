@@ -11,4 +11,6 @@ vim.cmd("set undofile")
 vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
 vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
 
+vim.keymap.set("n", "<leader>b", "<C-o>", opts)
+vim.keymap.set("n", "<leader>f", "<C-i>", opts)
 
