@@ -60,10 +60,13 @@ return {
             }),
             -- sources for autocompletion
             sources = cmp.config.sources({
-                { name = "nvim_lsp"},
-                { name = "luasnip" }, -- snippets
-                { name = "buffer" }, -- text within current buffer
-                { name = "path" }, -- file system paths
+                { name = "nvim_lsp" },   -- Sprache-Server
+                { name = "nvim_lsp_signature_help" }, -- Funktionsparameter/Signaturen
+                { name = "luasnip" },    -- Snippet-Integration
+                { name = "buffer" },     -- aktueller Buffer
+                { name = "path" },       -- Dateipfade
+                { name = "nvim_lua" },   -- für Neovim Lua-API
+                { name = "cmdline" },    -- für Befehlszeile (wenn separat konfiguriert)
             }),
 
             -- configure lspkind for vs-code like pictograms in completion menu
