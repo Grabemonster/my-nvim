@@ -13,5 +13,16 @@ vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
 
 vim.keymap.set("n", "<leader>b", "<C-o>", opts)
 vim.keymap.set("n", "<leader>f", "<C-i>", opts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = lsp_group,
+  callback = function(args)
+    local bufnr = args.buf
+    local opts = { buffer = bufnr, silent = true }
+
+    -- gd → jump to definition
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    -- teste z. B. auch:
+    -- vim.notify("LSP attached to buffer "..bufnr)
+  end,
+})
 
