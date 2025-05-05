@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts) 
     vim.keymap.set('n', 'K',  vim.lsp.buf.hover,        opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts) 
-    vim.kkeymap.set('n', 'se', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', 'se', vim.diagnostic.open_float, opts)
   end,
 })
 
