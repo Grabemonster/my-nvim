@@ -20,9 +20,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local opts = { buffer = bufnr, silent = true }
 
     -- gd → jump to definition
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    -- teste z. B. auch:
-    vim.notify("LSP attached to buffer "..bufnr)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts) 
+    vim.keymap.set('n', 'K',  vim.lsp.buf.hover,        opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts) 
+    vim.kkeymap.set('n', 'se', vim.diagnostic.open_float, opts)
   end,
 })
 
