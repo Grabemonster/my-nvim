@@ -13,4 +13,5 @@ vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
 
 vim.keymap.set("n", "<leader>b", "<C-o>", opts)
 vim.keymap.set("n", "<leader>f", "<C-i>", opts)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 
