@@ -13,7 +13,6 @@ let
         { name = "phpactor";                    lspconfigName = "phpactor";}
         { name = "java-language-server";        lspconfigName = "java-language-server";}
         { name = "arduino-language-server";     lspconfigName = "arduino-language-server";}
-        { name = "llvmPackages_19.clang-tools"; lspconfigName = "clangd";} 
     ];
 
     lspConfigTemplate = lsp: ''
