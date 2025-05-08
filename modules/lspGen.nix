@@ -10,6 +10,10 @@ let
         { name = "vscode-langservers-extracted";lspconfigName = "html";}
         { name = "vscode-langservers-extracted";lspconfigName = "jsonls";}
         { name = "vscode-langservers-extracted";lspconfigName = "eslint";}
+        { name = "phpactor";                    lspconfigName = "phpactor";}
+        { name = "java-language-server";        lspconfigName = "java-language-server";}
+        { name = "arduino-language-server";     lspconfigName = "arduino-language-server";}
+        { name = "llvmPackages_19.clang-tools"; lspconfigName = "clangd";} 
     ];
 
     lspConfigTemplate = lsp: ''
