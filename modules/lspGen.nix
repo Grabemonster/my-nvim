@@ -11,8 +11,8 @@ let
         { name = "vscode-langservers-extracted";lspconfigName = "jsonls";}
         { name = "vscode-langservers-extracted";lspconfigName = "eslint";}
         { name = "phpactor";                    lspconfigName = "phpactor";}
-        { name = "java-language-server";        lspconfigName = "java-language-server";}
-        { name = "arduino-language-server";     lspconfigName = "arduino-language-server";}
+        { name = "java-language-server";        lspconfigName = "java_language_server";}
+        { name = "arduino-language-server";     lspconfigName = "arduino_language_server";}
     ];
 
     lspConfigTemplate = lsp: ''
