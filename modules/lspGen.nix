@@ -11,12 +11,12 @@ let
         { name = "vscode-langservers-extracted";lspconfigName = "jsonls";}
         { name = "vscode-langservers-extracted";lspconfigName = "eslint";}
         { name = "phpactor";                    lspconfigName = "phpactor";}
-        { name = "java-language-server";        lspconfigName = "java_language_server";}
-        { name = "arduino-language-server";     lspconfigName = "arduino_language_server";}
+        { name = "jdt-language-server";        lspconfigName = "jdtls";} 
+        { name = "clang-tools";                 lspconfigName = "clangd";}
     ];
 
     lspConfigTemplate = lsp: ''
-        require("lspconfig")["${lsp.lspconfigName}"].setup({ 
+        require("lspconfig")["${lsp.lspconfigName}"].setup({
             cmd = create_cmd("${pkgs.${lsp.name}}/bin/", "${lsp.lspconfigName}"),
         })
     '';
@@ -55,7 +55,7 @@ let
 
                 -- Holen des Array aus get_cmd_for_lsp
                 local lsp_cmd_parts = get_cmd_for_lsp(lspconfig_name)
-    
+
                 -- Füge den Basisbefehl zum ersten Element hinzu
                 for i, part in ipairs(lsp_cmd_parts) do
                     if i == 1 then
