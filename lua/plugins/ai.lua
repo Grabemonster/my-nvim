@@ -1,4 +1,4 @@
---[[return {
+return {
     "Exafunction/windsurf.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -8,4 +8,4 @@
         require("codeium").setup({})
     end
 
-}]]
+}

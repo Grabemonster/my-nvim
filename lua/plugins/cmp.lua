@@ -71,7 +71,7 @@ return {
                 { name = "path" },       -- Dateipfade
                 { name = "nvim_lua" },   -- für Neovim Lua-API
                 { name = "cmdline" },    -- für Befehlszeile (wenn separat konfiguriert)
-                { name = "codeium" },
+                --{ name = "codeium" },
             }),
 
             -- configure lspkind for vs-code like pictograms in completion menu
