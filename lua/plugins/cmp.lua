@@ -43,8 +43,8 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-                ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+                ["<S-TAB>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+                ["<C-TAB>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<CR>"] = cmp.mapping.confirm({select = false}),
                 ["<C-CR>"] = function(fallback)
@@ -52,7 +52,7 @@ return {
                     fallback()
                 end,
 
-                ["<Tab>"] = function(fallback)
+                ["<S-Tab>"] = function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.expand_or_jumpable() then
@@ -71,7 +71,6 @@ return {
                 { name = "path" },       -- Dateipfade
                 { name = "nvim_lua" },   -- für Neovim Lua-API
                 { name = "cmdline" },    -- für Befehlszeile (wenn separat konfiguriert)
-                --{ name = "codeium" },
             }),
 
             -- configure lspkind for vs-code like pictograms in completion menu
