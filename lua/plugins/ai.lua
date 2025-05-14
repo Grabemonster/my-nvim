@@ -4,8 +4,8 @@ return {
         config = function()
             require("supermaven-nvim").setup({
                 keymaps = {
-                    accept_suggestion = ",",
-                    accept_word = ";",
+                    accept_suggestion = "<C-,>",
+                    accept_word = "<C-;>",
                 },
                 color = {
                     suggestion_color = "#550055",
