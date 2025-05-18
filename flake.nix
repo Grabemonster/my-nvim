@@ -32,8 +32,16 @@
             runtimeInputs = nvim_pkgs;
 
             text=''
-                exec nvim "$@"
-                '';
+               # Stelle sicher, dass Node-Module installiert sind
+               if [ -d "$HOME/.local/share/nvim/lazy/markdown-preview.nvim/app" ]; then
+               cd "$HOME/.local/share/nvim/lazy/markdown-preview.nvim/app"
+               if [ ! -d "node_modules" ]; then
+               echo "📦 Installing markdown-preview dependencies..."
+               npm install
+               fi
+               fi 
+               exec nvim "$@"
+               '';
         };
 
         # Hier definierst du die devShell
