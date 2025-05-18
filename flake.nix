@@ -11,6 +11,7 @@
         nvim_pkgs = with pkgs; [
                 neovim
                 nodejs_20
+                nodePackages.npm
                 python3
                 luarocks
                 fzf
