@@ -40,8 +40,7 @@
         tslib-env = pkgs.buildNpmPackage {
             pname = "tslib-env";
             version = "1.0.0";
-            
-
+        
             src = ./.;
             npmDepsHash = "sha256-AOsJUnKP1rG6Jj8hBbA044zqdTmbkK1SHRhMFhFE5bc=";
             dontNpmBuild = true;
@@ -51,6 +50,7 @@
         devShell = pkgs.mkShell {
             buildInputs = nvim_pkgs;
             shellHook = ''
+                export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules
         # Setze den NVIM_CONFIG_DIR auf den lokalen Ordner der Flake
                 echo $PWD
                 export XDG_CONFIG_HOME="$PWD/../"  # Hier auf den lokalen Ordner umstellen
