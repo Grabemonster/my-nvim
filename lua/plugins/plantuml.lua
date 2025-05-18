@@ -1,4 +1,15 @@
 return {
-    "weirongxu/plantuml-previewer.vim",
-    dependencies = { "tyru/open-browser.vim" },
+    {
+        "weirongxu/plantuml-previewer.vim",
+        dependencies = { "tyru/open-browser.vim" },
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    }
 }
