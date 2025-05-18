@@ -33,10 +33,7 @@
             runtimeInputs = nvim_pkgs;
 
             text=''
-                export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules
-                mkdir -p ~/.local/lib/node_modules
-                ln -s $(nix eval --raw .#tslib-env)/lib/node_modules/my-nvim-config/node_modules/tslib ~/.local/lib/node_modules/tslib
-                export NODE_PATH=$HOME/.local/lib/node_modules
+                export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules/
 
                 exec nvim "$@"
                '';
@@ -45,24 +42,25 @@
         tslib-env = pkgs.buildNpmPackage {
             pname = "tslib-env";
             version = "1.0.0";
-        
-            src = ./.;
-            npmDepsHash = "sha256-AOsJUnKP1rG6Jj8hBbA044zqdTmbkK1SHRhMFhFE5bc=";
-            dontNpmBuild = true;
-        };
 
+            src = ./.;
+
+            npmDepsHash = "sha256-AOsJUnKP1rG6Jj8hBbA044zqdTmbkK1SHRhMFhFE5bc=";
+ 
+            dontNpmBuild = true;
+        }; 
         # Hier definierst du die devShell
         devShell = pkgs.mkShell {
             buildInputs = nvim_pkgs;
             shellHook = ''
-                export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules
-        # Setze den NVIM_CONFIG_DIR auf den lokalen Ordner der Flake
+                export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules/
+                # Setze den NVIM_CONFIG_DIR auf den lokalen Ordner der Flake
                 echo $PWD
                 export XDG_CONFIG_HOME="$PWD/../"  # Hier auf den lokalen Ordner umstellen
                 export NVIM_CONFIG_DIR="$PWD/../"
-            '';
+                '';
         };
-     in {
+    in {
         # Exportiere `my-nvim` unter `packages.${system}.my-nvim`
         packages.${system}.my-nvim = my-nvim;
 
