@@ -23,6 +23,7 @@
                 cmake
                 cargo
                 lua-language-server
+                temurin-jre-bin-17
             ];
         my-nvim = pkgs.writeShellApplication {
             name = "my-nvim";
