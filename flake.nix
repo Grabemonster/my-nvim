@@ -31,10 +31,15 @@
 
             runtimeInputs = nvim_pkgs;
 
-            text=''
-                npm install
-                exec nvim "$@"
-               '';
+            text = ''
+    cd ~/.local/share/nvim/lazy/markdown-preview.nvim
+    if [ ! -d node_modules ]; then
+      npm install
+    fi
+
+    cd -
+    exec nvim "$@"
+  '';
         }; 
         # Hier definierst du die devShell
         devShell = pkgs.mkShell {
