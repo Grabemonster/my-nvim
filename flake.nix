@@ -40,21 +40,11 @@
         tslib-env = pkgs.buildNpmPackage {
             pname = "tslib-env";
             version = "1.0.0";
+            
 
-            src = pkgs.runCommand "empty-src" { } ''
-            mkdir -p $out
-                echo '{}' > $out/package.json
-    '';
-
-            npmDeps = pkgs.fetchNpmDeps {
-                packageJson = ./package.json;
-                lockfile = ./package-lock.json;
-            };
-
-            installPhase = ''
-    mkdir -p $out
-    cp -r node_modules $out/
-    '';
+            src = ./.;
+            npmDepsHash = "sha256-AOsJUnKP1rG6Jj8hBbA044zqdTmbkK1SHRhMFhFE5bc=";
+            dontNpmBuild = true;
         };
 
         # Hier definierst du die devShell
