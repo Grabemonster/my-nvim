@@ -12,7 +12,7 @@
                 neovim
                 nodejs_20
                 nodePackages.npm
-                nodePackages.tslib
+                tslib-env
                 python3
                 luarocks
                 fzf
@@ -34,7 +34,27 @@
 
             text=''
                exec nvim "$@"
-            '';
+               '';
+        };
+
+        tslib-env = pkgs.buildNpmPackage {
+            pname = "tslib-env";
+            version = "1.0.0";
+
+            src = pkgs.runCommand "empty-src" { } ''
+            mkdir -p $out
+                echo '{}' > $out/package.json
+    '';
+
+            npmDeps = pkgs.fetchNpmDeps {
+                packageJson = ./package.json;
+                lockfile = ./package-lock.json;
+            };
+
+            installPhase = ''
+    mkdir -p $out
+    cp -r node_modules $out/
+    '';
         };
 
         # Hier definierst du die devShell
