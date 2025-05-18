@@ -34,6 +34,10 @@
 
             text=''
                 export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules
+                mkdir -p ~/.local/lib/node_modules
+                ln -s $(nix eval --raw .#tslib-env)/lib/node_modules/my-nvim-config/node_modules/tslib ~/.local/lib/node_modules/tslib
+                export NODE_PATH=$HOME/.local/lib/node_modules
+
                 exec nvim "$@"
                '';
         };
