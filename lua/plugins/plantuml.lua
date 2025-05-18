@@ -1,3 +1,4 @@
 return {
-    "weirongxu/plantuml-previewer.vim" 
+    "weirongxu/plantuml-previewer.vim",
+    dependencies = { "tyru/open-browser.vim" },
 }
