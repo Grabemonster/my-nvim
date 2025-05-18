@@ -33,7 +33,8 @@
             runtimeInputs = nvim_pkgs;
 
             text=''
-               exec nvim "$@"
+                export NODE_PATH=${tslib-env}/lib/node_modules/my-nvim-config/node_modules
+                exec nvim "$@"
                '';
         };
 
