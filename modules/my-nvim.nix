@@ -50,6 +50,8 @@ let
         home.packages = [ my-nvim ];
         home.file.".config/nvim/init.lua".source = ../init.lua;
         home.file.".config/nvim/lua".source = myBuiltinLua; 
+        home.file.".config/nvim/package.json".source = ../package.json;
+        home.file.".config/nvim/package-lock.json".source = ../package-lock.json;
 
         home.sessionVariables = mkIf cfg.setEditor {
             EDITOR = "${my-nvim}/bin/my-nvim";
