@@ -13,6 +13,8 @@ let
         { name = "phpactor";                    lspconfigName = "phpactor";}
         { name = "jdt-language-server";        lspconfigName = "jdtls";} 
         { name = "clang-tools";                 lspconfigName = "clangd";}
+        { name = "sqls";                        lspconfigName = "sqlls";}
+
     ];
 
     lspConfigTemplate = lsp: ''
