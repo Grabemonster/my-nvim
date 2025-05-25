@@ -12,7 +12,7 @@ return {
                     name = 'plantuml_svg',
                     renderer = {
                         type = 'command',
-                        opts = { cmd = { 'xdg-open' } }, -- oder 'chromium', 'xdg-open'
+                        opts = { cmd = { 'firefox' } }, -- oder 'chromium', 'xdg-open'
                     },
                 },
             },
