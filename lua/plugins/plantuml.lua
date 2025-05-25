@@ -5,12 +5,15 @@ return {
     {
         'https://gitlab.com/itaranto/preview.nvim',
         version = '*',
-        previewers = {
-            plantuml_svg = {
-                args = { '-pipe', '-tpng' },
+        opts = {
+            previewers_by_ft = {
+                plantuml = {
+                    name = 'plantuml_svg',
+                    renderer = { type = 'command', opts = { cmd = { 'firefox' } } },
+                },
             },
-        },
 
+        }
     }
 
     --{
