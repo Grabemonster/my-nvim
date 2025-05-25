@@ -4,7 +4,13 @@ return {
     },
     {
         'https://gitlab.com/itaranto/preview.nvim',
-        version = '*', 
+        version = '*',
+        previewers = {
+            plantuml_svg = {
+                args = { '-pipe', '-tpng' },
+            },
+        },
+
     }
 
     --{
