@@ -1,7 +1,12 @@
 return { 
     {
         "brianhuster/live-preview.nvim",
+    },
+    {
+        'https://gitlab.com/itaranto/preview.nvim',
+        version = '*', 
     }
+
     --{
     --    "iamcco/markdown-preview.nvim",
     --    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
