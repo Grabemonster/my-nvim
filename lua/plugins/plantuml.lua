@@ -18,7 +18,6 @@ return {
     --    }
     --}
     {
-        "plantuml-autowatch",
         ft = { "puml", "plantuml" },
         config = function()
             -- Konfigurierbare Optionen
