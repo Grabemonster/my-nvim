@@ -6,13 +6,25 @@ return {
         'https://gitlab.com/itaranto/preview.nvim',
         version = '*',
         opts = {
+            render_on_write = true,
             previewers_by_ft = {
                 plantuml = {
                     name = 'plantuml_svg',
-                    renderer = { type = 'command', opts = { cmd = { 'firefox' } } },
+                    renderer = {
+                        type = 'command',
+                        opts = { cmd = { 'firefox' } }, -- oder 'chromium', 'xdg-open'
+                    },
                 },
             },
-
+            previewers = {
+                plantuml_svg = {
+                    -- args für SVG-Ausgabe, stdin=false bedeutet Datei-Input
+                    command = 'plantuml',
+                    args = { '-tsvg', '$INPUT_FILE', '-o', '.' },
+                    stdin = false,
+                    stdout = false,
+                },
+            },
         }
     }
 
