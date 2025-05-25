@@ -19,12 +19,14 @@ return {
     --} 
     {
         dir = vim.fn.stdpath("config") .. "/lua/customPlugins/plantumlWatch",
-        ft = { "puml", "plantuml" },
-        opts = {
-            args = { "-tsvg", "-darkmode" },
-            on_rendered = function(output_file)
-                print("Gerendert: " .. output_file)
-            end,
-        },
-    }
+        ft = { "plantuml" },
+        config = function()
+            require("customPlugins.plantumlWatch").setup({
+                args = { "-tsvg", "-darkmode" },
+                on_rendered = function(output_file)
+                    vim.notify(output_file, vim.log.levels.INFO)
+                end,
+            })
+        end,
+    },
 }
