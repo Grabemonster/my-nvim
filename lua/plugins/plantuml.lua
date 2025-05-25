@@ -18,7 +18,7 @@ return {
     --    }
     --} 
     {
-        dir = "../customPlugins/plantumlWatch.lua",
+        dir = vim.fn.stdpath("config") .. "/lua/customPlugins/plantumlWatch.lua",
         ft = { "puml", "plantuml" },
         opts = {
             args = { "-tsvg", "-darkmode" },
