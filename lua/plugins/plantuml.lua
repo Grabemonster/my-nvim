@@ -18,7 +18,7 @@ return {
     --    }
     --} 
     {
-        "customPlugins.plantuml",
+        dir = "../customPlugins/plantumlWatch.lua",
         ft = { "puml", "plantuml" },
         opts = {
             args = { "-tsvg", "-darkmode" },
