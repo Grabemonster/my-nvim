@@ -31,7 +31,7 @@ return {
             -- This option closes the image viewer and reopen the image generated
             -- When true this offers some kind of online updating (like plantuml web server)
             actions = {
-                redraw = false
+                redraw = true
             },
             -- If you want to customize the image showed when running this plugin
             image = {
