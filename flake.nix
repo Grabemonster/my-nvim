@@ -25,7 +25,8 @@
                 cargo
                 lua-language-server
                 temurin-jre-bin-17
-                plantuml 
+                plantuml
+                imv
             ];
         my-nvim = pkgs.writeShellApplication {
             name = "my-nvim";

@@ -11,10 +11,7 @@ return {
                 plantuml = {
                     name = 'plantuml_svg',
                     renderer = {
-                        type = 'command',
-                        opts = { 
-                            cmd = { os.getenv("BROWSER") }
-                        }, -- oder 'chromium', 'xdg-open'
+                        type = 'imv', 
                     },
                 },
             },
