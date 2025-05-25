@@ -39,7 +39,7 @@ return {
                 format = "svg", -- Choose between png or svg 
 
                 execute_to_open = function(img)
-                    return
+                    return "firefox " .. img
                 end
             }
         }
