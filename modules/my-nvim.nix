@@ -22,6 +22,11 @@ let
             default = pkgs.neovim;
             description = "Neovim package to use";
         };
+        browser = mkOption {
+            type = types.str;
+            default = "firefox";
+            description = "Browser to use";
+        };
         viAlias = mkOption {
             type = types.bool;
             default = false;
@@ -56,6 +61,7 @@ let
         home.sessionVariables = mkIf cfg.setEditor {
             EDITOR = "${my-nvim}/bin/my-nvim";
             VISUAL = "${my-nvim}/bin/my-nvim";
+            BROWSER = cfg.browser;
         };
 
 

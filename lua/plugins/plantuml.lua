@@ -13,7 +13,7 @@ return {
                     renderer = {
                         type = 'command',
                         opts = { 
-                            cmd = { 'sh', '-c', 'gio open "$1"', '_' }
+                            cmd = { os.getenv("BROWSER") }
                         }, -- oder 'chromium', 'xdg-open'
                     },
                 },

@@ -39,9 +39,7 @@
         # Hier definierst du die devShell
         devShell = pkgs.mkShell {
             buildInputs = nvim_pkgs;
-            shellHook = ''
-                npm install
-                # Setze den NVIM_CONFIG_DIR auf den lokalen Ordner der Flake
+            shellHook = '' 
                 echo $PWD
                 export XDG_CONFIG_HOME="$PWD/../"  # Hier auf den lokalen Ordner umstellen
                 export NVIM_CONFIG_DIR="$PWD/../"
