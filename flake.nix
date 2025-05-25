@@ -26,6 +26,7 @@
                 lua-language-server
                 temurin-jre-bin-17
                 plantuml
+                glib
             ];
         my-nvim = pkgs.writeShellApplication {
             name = "my-nvim";
