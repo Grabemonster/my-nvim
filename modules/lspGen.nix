@@ -29,47 +29,29 @@ let
     return {
         "neovim/nvim-lspconfig",
         config = function()
-            local function get_cmd_for_lsp(lspconfigName)
-                -- Erstelle den Pfad zur lsp-Konfigurationsdatei für das angegebene lspconfigName
-                local lsp_file_path = "~/.local/share/nvim/lazy/nvim-lspconfig/lsp/" .. lspconfigName .. ".lua"
-
-                -- Führe den Befehl aus, um den cmd-Wert zu extrahieren
-                local cmd_output = vim.fn.system(
-                    "cat " .. lsp_file_path ..
-                    " | ${pkgs.gnugrep}/bin/grep 'cmd = { '" ..
-                    " | ${pkgs.coreutils}/bin/cut -f 5- -d ' '" ..
-                    " | ${pkgs.gnused}/bin/sed -E 's/.*cmd = (.*)/\\1/'" ..
-                    " | ${pkgs.perl}/bin/perl -pe 's/^\\{\\s*(.*?)\\s*\\},?$/\\1/' " ..
-                    " | ${pkgs.gnused}/bin/sed -E \"s/'/ /g\"" ..
-                    " | ${pkgs.coreutils}/bin/tr -d '[:space:]'"
-                ) 
-
-                -- Entferne führende und abschließende Leerzeichen oder Zeilenumbrüche und gebe den Wert als Array zurück
-                local cmd_parts = vim.split(vim.fn.trim(cmd_output), ",")
-
-                -- Rückgabe als Array
-                return cmd_parts
-            end
-
-            -- Funktion zum Erstellen des vollständigen cmd-Arrays
-            local function create_cmd(base_cmd, lspconfig_name)
-                local cmd_parts = {}
-
-                -- Holen des Array aus get_cmd_for_lsp
-                local lsp_cmd_parts = get_cmd_for_lsp(lspconfig_name)
-
-                -- Füge den Basisbefehl zum ersten Element hinzu
-                for i, part in ipairs(lsp_cmd_parts) do
-                    if i == 1 then
-                        table.insert(cmd_parts, base_cmd .. part)
-                    else
-                        table.insert(cmd_parts, part)
-                    end
+            llocal function get_cmd_for_lsp(lspconfigName)
+                local lspconfig = require('lspconfig')
+                if lspconfig[lspconfigName] then
+                    return lspconfig[lspconfigName].document_config.default_config.cmd
+                else
+                    return nil 
                 end
-
-                return cmd_parts
             end
-
+            local function create_cmd(base_cmd, lspconfig_name)
+                local default_cmd = get_cmd_for_lsp(lspconfig_name)
+                if default_cmd then
+                    local cmd = {}
+                    for i, part in ipairs(default_cmd) do
+                        if i == 1 then
+                            table.insert(cmd, base_cmd .. part)
+                        else
+                            table.insert(cmd, part)
+                        end
+                    end
+                return cmd
+            end
+    return {}
+end
         ${configBody}
 
       end,
