@@ -29,7 +29,7 @@ let
     return {
         "neovim/nvim-lspconfig",
         config = function()
-            llocal function get_cmd_for_lsp(lspconfigName)
+            local function get_cmd_for_lsp(lspconfigName)
                 local lspconfig = require('lspconfig')
                 if lspconfig[lspconfigName] then
                     return lspconfig[lspconfigName].document_config.default_config.cmd
