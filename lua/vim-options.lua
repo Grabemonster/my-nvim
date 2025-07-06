@@ -10,6 +10,7 @@ vim.cmd("set colorcolumn=100")
 vim.cmd("set undofile")
 vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
 vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
+vim.api.nvim_set_hl(0, "LineNr", {fg = "#D6A276"})
 
 vim.keymap.set("n", "<leader>b", "<C-o>", opts)
 vim.keymap.set("n", "<leader>f", "<C-i>", opts)
