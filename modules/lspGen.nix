@@ -14,6 +14,7 @@ let
         { name = "jdt-language-server";        lspconfigName = "jdtls";} 
         { name = "clang-tools";                 lspconfigName = "clangd";}
         { name = "sqls";                        lspconfigName = "sqlls";}
+        { name = "texlab";                      lspconfigName = "texlab";}
 
     ];
 
