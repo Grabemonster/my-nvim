@@ -19,7 +19,7 @@ let
     ];
 
     lspConfigTemplate = lsp: ''
-        require("lspconfig")["${lsp.lspconfigName}"].setup({
+        vim.lsp.config("${lsp.lspconfigName}").setup({
             cmd = create_cmd("${pkgs.${lsp.name}}/bin/", "${lsp.lspconfigName}"),
         })
     '';
