@@ -31,14 +31,23 @@ let
     return {
         "neovim/nvim-lspconfig",
         config = function()
-            local function get_cmd_for_lsp(lspconfigName)
-                local lspconfig = require('lspconfig')
-                if lspconfig[lspconfigName] then
-                    return lspconfig[lspconfigName].document_config.default_config.cmd
-                else
-                    return nil 
-                end
-            end
+            local function get_default_cmd(name)
+  -- Neuer Weg (kommt mit nvim-lspconfig ≥ 3.0.0)
+  if vim.lsp.get_configs then
+    local cfgs = vim.lsp.get_configs()
+    if cfgs and cfgs[name] and cfgs[name].cmd then
+      return vim.deepcopy(cfgs[name].cmd)
+    end
+  end
+
+  -- Alter Weg (heute)
+  local ok, lspconfig = pcall(require, "lspconfig")
+  if ok and lspconfig[name] and lspconfig[name].document_config then
+    return vim.deepcopy(lspconfig[name].document_config.default_config.cmd)
+  end
+
+  return nil
+end
             local function create_cmd(base_cmd, lspconfig_name)
                 local default_cmd = get_cmd_for_lsp(lspconfig_name)
                 if default_cmd then
@@ -54,10 +63,9 @@ let
             end
     return {}
 end
-        ${configBody}
-
-      end,
-    }
+${configBody}
+end,
+}
     '';
 
 in
