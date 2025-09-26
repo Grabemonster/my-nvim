@@ -19,9 +19,9 @@ let
     ];
 
     lspConfigTemplate = lsp: ''
-        vim.lsp.config("${lsp.lspconfigName}").setup({
+        vim.lsp.config("${lsp.lspconfigName}").setup{
             cmd = create_cmd("${pkgs.${lsp.name}}/bin/", "${lsp.lspconfigName}"),
-        })
+        }
     '';
 
     configBody = builtins.concatStringsSep "\n" (builtins.map lspConfigTemplate lspList);
