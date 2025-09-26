@@ -3,7 +3,7 @@ return {
     config = function()
         local lspconf = require('lspconfig')
 
-        lspconf.pyright.setup({
+        lspconf.pyright.setup{
             settings = {
                 python = {
                     analysis = {
@@ -14,6 +14,6 @@ return {
                     }
                 }, 
             }
-        })
+        }
     end,
 }
