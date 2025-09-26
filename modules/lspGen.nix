@@ -49,7 +49,7 @@ let
   return nil
 end
             local function create_cmd(base_cmd, lspconfig_name)
-                local default_cmd = get_cmd_for_lsp(lspconfig_name)
+                local default_cmd = get_default_cmd(lspconfig_name)
                 if default_cmd then
                     local cmd = {}
                     for i, part in ipairs(default_cmd) do
