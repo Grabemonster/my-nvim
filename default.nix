@@ -4,8 +4,6 @@ pkgs.buildFHSEnv {
   name = "nvim-env";
 
   targetPkgs = pkgs: with pkgs; [
-    neovim
-
     nodejs
     python3
     python3Packages.pip
