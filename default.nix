@@ -5,9 +5,9 @@ pkgs.buildFHSEnv {
 
   extraBwrapArgs =
   if user != null then
-    [ "--bind" "./nvim" "/home/${user}/.config/nvim" ]
+    [ "--bind" "${./nvim}" "/home/${user}/.config/nvim" ]
   else
-    [ "--bind" "./nvim" "$HOME/.config/nvim" ];
+    [ "--bind" "${./nvim}" "$HOME/.config/nvim" ];
 
   targetPkgs = pkgs: with pkgs; [
     nodejs
