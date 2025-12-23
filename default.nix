@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, ... }:
 
 pkgs.buildFHSEnv {
   name = "nvim-env";
