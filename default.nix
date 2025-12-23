@@ -1,7 +1,11 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs, user, ... }:
 
 pkgs.buildFHSEnv {
   name = "nvim-env";
+
+  extraBwrapArgs = [
+    "--bind" "./nvim" "$HOME/.config/nvim"
+  ];
 
   targetPkgs = pkgs: with pkgs; [
     nodejs
@@ -26,7 +30,7 @@ pkgs.buildFHSEnv {
 
 runScript = ''
    bash -c '
-    export NVIM_APPNAME=nvimtest
+    export NVIM_APPNAME=nvim
     exec ${pkgs.neovim}/bin/nvim "$@"
   '
 '';
