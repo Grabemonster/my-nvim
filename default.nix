@@ -1,13 +1,20 @@
 { pkgs, user ? null, ... }:
+let
+config = if user != null then "/home/${user}/.config/nvim" else "$HOME/.config/nvim";
+tempfs = "/etc/nvim";
 
+in
 pkgs.buildFHSEnv {
   name = "nvim-env";
 
-  extraBwrapArgs =
-  if user != null then
-    [ "--bind" "${./nvim}" "/home/${user}/.config/nvim" ]
-  else
-    [ "--bind" "${./nvim}" "$HOME/.config/nvim" ];
+  extraBwrapArgs = [
+  "--dir" "${config}"
+  "--tmpfs" "${config}"
+  "--dir" "${config}/lua"
+  "--ro-bind" "${./nvim}/lua" "${config}/lua" 
+  "--ro-bind" "${./nvim}/init.lua" "${config}/init.lua" 
+  ];
+
 
   targetPkgs = pkgs: with pkgs; [
     nodejs
@@ -32,10 +39,11 @@ pkgs.buildFHSEnv {
 
 runScript = ''
    bash -c '
+    cp -n ${./nvim}/lazy-lock.json ${tempfs}/lazy-lock.json
+    chmod 0666 ${config}/lazy-lock.json
+
     export NVIM_APPNAME=nvim
     exec ${pkgs.neovim}/bin/nvim "$@"
-  '
+  '  _ "$@"
 '';
-
-
 }

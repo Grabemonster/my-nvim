@@ -21,7 +21,7 @@
       pkgs.mkShell {
         buildInputs = [ self.packages.${system}.nvim-env ];
         shellHook = ''
-        exec ${self.packages.${system}.nvim-env}/bin/nvim-env
+        exec ${self.packages.${system}.nvim-env}/bin/nvim-env "$@"
       '';
       };
   };
