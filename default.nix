@@ -39,7 +39,7 @@ pkgs.buildFHSEnv {
 
 runScript = ''
    bash -c '
-    cp -n ${./nvim}/lazy-lock.json ${tempfs}/lazy-lock.json
+    cp -n ${./nvim}/lazy-lock.json ${config}/lazy-lock.json
     chmod 0666 ${config}/lazy-lock.json
 
     export NVIM_APPNAME=nvim
